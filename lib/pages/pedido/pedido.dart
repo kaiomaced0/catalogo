@@ -68,7 +68,8 @@ class _PedidoPageState extends State<PedidoPage> {
                               cursor: SystemMouseCursors.click,
                               child: Container(
                                 width: MediaQuery.of(context).size.width * 0.3,
-                                height: MediaQuery.of(context).size.width * 0.11,
+                                height:
+                                    MediaQuery.of(context).size.width * 0.11,
                                 decoration: ShapeDecoration(
                                   color: const Color.fromARGB(255, 37, 29, 109),
                                   shape: RoundedRectangleBorder(
@@ -96,7 +97,10 @@ class _PedidoPageState extends State<PedidoPage> {
                                 ),
                               ),
                             ),
-                            onTap: () => gerarPdf(pedido, context),
+                            onTap: () async {
+                              gerarPdf(pedido, context);
+                              print('ok');
+                            },
                           ),
                         ),
                         Padding(
@@ -145,7 +149,8 @@ class _PedidoPageState extends State<PedidoPage> {
                               cursor: SystemMouseCursors.click,
                               child: Container(
                                 width: MediaQuery.of(context).size.width * 0.3,
-                                height: MediaQuery.of(context).size.width * 0.11,
+                                height:
+                                    MediaQuery.of(context).size.width * 0.11,
                                 decoration: ShapeDecoration(
                                   color: const Color.fromARGB(255, 29, 124, 32),
                                   shape: RoundedRectangleBorder(
@@ -173,7 +178,8 @@ class _PedidoPageState extends State<PedidoPage> {
                                 ),
                               ),
                             ),
-                            onTap: () => showConfirmationDialogFinalizar(context),
+                            onTap: () =>
+                                showConfirmationDialogFinalizar(context),
                           ),
                         ),
                       ],

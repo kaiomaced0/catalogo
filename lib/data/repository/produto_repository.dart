@@ -60,7 +60,7 @@ class ProdutoRepository {
     ),
     Produto(
       id: 8,
-      nome: '',
+      nome: '60.100.17 - 2.50.17',
       image: 'assets/images/catalogo9.jpg',
       descricao: '',
       preco: 0.0,

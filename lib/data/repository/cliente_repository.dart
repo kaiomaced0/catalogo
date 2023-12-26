@@ -1,5 +1,7 @@
 import 'package:catalogo/data/model/cliente.dart';
 
+import 'package:shared_preferences/shared_preferences.dart';
+
 class ClienteRepository {
   static void adicionaLista(Cliente c) {
     clientes.add(c);
@@ -11,6 +13,7 @@ class ClienteRepository {
   static int tamanhoListaCliente = 2;
 
   static int clienteAtual = 0;
+  
 
   static List<Cliente> clientes = [
     Cliente(

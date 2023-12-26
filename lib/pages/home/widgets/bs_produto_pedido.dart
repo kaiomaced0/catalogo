@@ -25,7 +25,7 @@ Future bsProdutoPedido(BuildContext context, int id) {
       context: context,
       builder: (BuildContext context) {
         return FractionallySizedBox(
-          heightFactor: 0.6,
+          heightFactor: 0.75,
           child: SingleChildScrollView(
               child: SizedBox(
             child: Center(
@@ -35,7 +35,7 @@ Future bsProdutoPedido(BuildContext context, int id) {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Padding(
-                      padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
+                      padding: const EdgeInsets.fromLTRB(0, 5, 0, 0),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -76,11 +76,7 @@ Future bsProdutoPedido(BuildContext context, int id) {
                             TextField(
                               controller: tQuant,
                               onChanged: (value) {
-                                if (value.isNotEmpty) {
-                                  quantidade = int.parse(value);
-                                } else {
-                                  quantidade = 0;
-                                }
+                                quantidade = int.parse(value);
                               },
                               keyboardType: TextInputType.number,
                               autofocus: false,

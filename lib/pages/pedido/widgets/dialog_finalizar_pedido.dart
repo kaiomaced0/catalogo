@@ -14,16 +14,6 @@ Future<void> showConfirmationDialogFinalizar(BuildContext context) async {
           TextButton(
             child: Text('Cancelar'),
             onPressed: () {
-              final snackBar = const SnackBar(
-                backgroundColor: Color.fromARGB(255, 243, 108, 99),
-                content: Text('Finalizar cancelado!'),
-                duration:
-                    Duration(seconds: 2), // Tempo que o SnackBar fica visível
-              );
-
-              // Exibe o SnackBar na parte inferior da tela
-              ScaffoldMessenger.of(context).showSnackBar(snackBar);
-
               Navigator.of(context).pop(); // Fechar o diálogo
             },
           ),

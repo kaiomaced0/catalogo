@@ -1,24 +1,32 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:catalogo/data/model/produto.dart';
 import 'package:catalogo/data/repository/produto_repository.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:path/path.dart';
 
-selecionarImagem() async{
-  final ImagePicker picker = ImagePicker();
+Future<String?> saveImage(XFile? file) async {
+  if (file == null) return null;
 
-  try{
-    XFile? file = await picker.pickImage(source: ImageSource.gallery);
-    if( file != null ) {
-      imagemSelecionada = file;
-    };
+  final directory = await getApplicationDocumentsDirectory();
+  final imagePath = '${directory.path}/images';
 
+  final imageDirectory = Directory(imagePath);
+  if (!imageDirectory.existsSync()) {
+    imageDirectory.createSync(recursive: true);
   }
-  catch(e) {
-    print(e);
-  }
+
+  final fileName = basename(file.path);
+  final localImagePath = '$imagePath/$fileName';
+  final savedImage = await File(file.path).copy(localImagePath);
+
+  return savedImage.path;
 }
 
-XFile? imagemSelecionada;
+final picker = ImagePicker();
+String? imagePath;
 Widget bsProdutoAdicionar(BuildContext context) {
   late String nome = '';
   late double preco = 0.0;
@@ -32,29 +40,43 @@ Widget bsProdutoAdicionar(BuildContext context) {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const Text('Nome Produto', textAlign: TextAlign.start),
-            TextField(
-              onChanged: (value) {
-                nome = value;
-              },
-              keyboardType: TextInputType.text,
-              autofocus: false,
-              decoration: const InputDecoration(hintMaxLines: 1),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                children: [
+                  const Text('Nome Produto', textAlign: TextAlign.start),
+                  TextField(
+                    onChanged: (value) {
+                      nome = value;
+                    },
+                    keyboardType: TextInputType.text,
+                    autofocus: false,
+                    decoration: const InputDecoration(hintMaxLines: 1),
+                  ),
+                ],
+              ),
             ),
-
-            const Text('Preço Produto', textAlign: TextAlign.start),
-            TextField(
-              onChanged: (value) {
-                preco = double.parse(value);
-              },
-              keyboardType: TextInputType.number,
-              autofocus: false,
-              decoration: const InputDecoration(hintMaxLines: 1),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                children: [
+                  const Text('Preço Produto', textAlign: TextAlign.start),
+                  TextField(
+                    onChanged: (value) {
+                      preco = double.parse(value);
+                    },
+                    keyboardType: TextInputType.number,
+                    autofocus: false,
+                    decoration: const InputDecoration(hintMaxLines: 1),
+                  ),
+                ],
+              ),
             ),
-
             ElevatedButton.icon(
               onPressed: () async {
-                  selecionarImagem();
+                XFile? file =
+                    await picker.pickImage(source: ImageSource.gallery);
+                imagePath = await saveImage(file);
               },
               icon: const Icon(Icons.image),
               label: const Text('Escolher Imagem do Produto'),
@@ -85,14 +107,12 @@ Widget bsProdutoAdicionar(BuildContext context) {
                           ],
                         ),
                         child: const Row(
-                          mainAxisAlignment:
-                          MainAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Align(
                               alignment: Alignment.bottomCenter,
                               child: Padding(
-                                padding: EdgeInsets.fromLTRB(
-                                    15, 5, 15, 5),
+                                padding: EdgeInsets.fromLTRB(15, 5, 15, 5),
                                 child: Text('Salvar',
                                     style: TextStyle(
                                       fontSize: 20,
@@ -108,10 +128,16 @@ Widget bsProdutoAdicionar(BuildContext context) {
                   ),
                 ),
                 onTap: () {
-                  Produto p = Produto(nome: nome, image: 'assets/image/$imagem', descricao: null, preco: preco);
-                  print('adicionado produto a lista $p');
-                  ProdutoRepository.produtos.add(p);
-                  Navigator.of(context).pop();
+                  if (imagePath != null) {
+                    Produto p = Produto(
+                        nome: nome,
+                        image: imagePath,
+                        descricao: null,
+                        preco: 0.0);
+                    print('adicionado produto a lista $p');
+                    ProdutoRepository.produtos.add(p);
+                    Navigator.of(context).pop();
+                  }
                 },
               ),
             ),

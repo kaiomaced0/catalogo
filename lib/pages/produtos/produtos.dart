@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:catalogo/data/repository/produto_repository.dart';
 import 'package:catalogo/pages/home/widgets/bnb_home.dart';
 import 'package:catalogo/pages/produtos/widgets/bs_produto_adicinar.dart';
-import 'package:catalogo/pages/produtos/widgets/card_produto_controle.dart';
 
 class ProdutosHome extends StatefulWidget {
   const ProdutosHome({super.key});
@@ -39,6 +38,6 @@ class _ProdutosHomeState extends State<ProdutosHome> {
         body: ListView.builder(
             itemCount: ProdutoRepository.produtos.length,
             itemBuilder: (context, int index) =>
-                cardProdutoControle(context, index)));
+                Text(ProdutoRepository.produtos[index].nome.toString())));
   }
 }

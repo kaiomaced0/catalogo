@@ -1,3 +1,4 @@
+import 'package:catalogo/pages/produtos/produtos.dart';
 import 'package:flutter/material.dart';
 import 'package:catalogo/data/repository/produto_repository.dart';
 import 'package:catalogo/pages/home/widgets/bnb_home.dart';
@@ -32,7 +33,11 @@ class _PageHomeState extends State<PageHome> {
                     value: 'opcao1',
                     child: Text('configs'),
                     onTap: () {
-                      Navigator.of(context).pushReplacementNamed('/produtos');
+                      Navigator.of(context).pushAndRemoveUntil(
+                        MaterialPageRoute(
+                            builder: (context) => const ProdutosHome()),
+                        (Route<dynamic> route) => route.isFirst,
+                      );
                     },
                   ),
                 ];

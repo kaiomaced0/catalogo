@@ -41,7 +41,7 @@ Future<void> gerarPdf(Pedido pedido, BuildContext context) async {
                                 pw.SizedBox(height: 20),
                                 pw.Header(
                                   level: 0,
-                                  text: 'Consultas',
+                                  text: 'Pedido',
                                 ),
                                 pw.SizedBox(height: 20),
                                 pw.Column(children: [
@@ -105,7 +105,7 @@ Future<void> gerarPdf(Pedido pedido, BuildContext context) async {
                                   children: [
                                     pw.Padding(
                                         padding: const pw.EdgeInsets.all(20),
-                                        child: pw.Text('By Kaio Macedo',
+                                        child: pw.Text('K M',
                                             style: pw.TextStyle(
                                                 fontStyle: pw.FontStyle.italic,
                                                 fontWeight: pw.FontWeight.bold,
@@ -117,15 +117,14 @@ Future<void> gerarPdf(Pedido pedido, BuildContext context) async {
       ],
     ),
   );
-
   final directory = await getApplicationDocumentsDirectory();
-  final file = File('${directory.path}/Pedidos.pdf');
+  final file = File('${directory.path}/pedidos.pdf');
   await file.writeAsBytes(await pdf.save());
   Navigator.push(
     context,
     MaterialPageRoute(
       builder: (context) =>
-          VisualizarPDF(path: '${directory.path}/Pedidos.pdf'),
+          VisualizarPDF(path: '${directory.path}/pedidos.pdf'),
     ),
   );
 }
