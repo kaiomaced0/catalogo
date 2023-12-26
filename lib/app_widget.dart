@@ -1,4 +1,4 @@
-import 'package:catalogo/pages/pedido/pedido_pdf_view.dart';
+import 'package:catalogo/pages/pedido/pdfview/pdfview_page.dart';
 import 'package:catalogo/pages/pedido/pedidos.dart';
 import 'package:catalogo/pages/pedido/widgets/relatorio/pedido_relatorio.dart';
 import 'package:flutter/material.dart';
@@ -25,7 +25,7 @@ class AppWidget extends StatelessWidget {
         '/clientes': (context) => const ClientePage(),
         '/pedidos': (context) => const PedidosPage(),
         '/relatoriopedido': (context) => const PedidoRelatorioPage(),
-        '/viewpdf': (context) => const PedidoPdfViewPage()
+        '/viewpdf': (context) => VisualizarPDF(path: null)
       },
     );
   }

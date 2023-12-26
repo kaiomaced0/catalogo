@@ -2,9 +2,10 @@ import 'dart:io';
 
 import 'package:catalogo/data/model/pedido.dart';
 import 'package:catalogo/data/repository/produto_repository.dart';
-import 'package:catalogo/pages/pedido/pedido_pdf_view.dart';
+import 'package:catalogo/pages/pedido/pdfview/pdfview_page.dart';
 import 'package:catalogo/pages/pedido/widgets/card_pedido.dart';
 import 'package:catalogo/pages/pedido/widgets/dialog_finalizar_pedido.dart';
+import 'package:catalogo/pages/pedido/widgets/gerarpdf.dart';
 import 'package:flutter/material.dart';
 import 'package:catalogo/data/repository/pedido_repository.dart';
 import 'package:catalogo/pages/home/widgets/bnb_home.dart';
@@ -45,9 +46,7 @@ class _PedidoPageState extends State<PedidoPage> {
                         Padding(
                           padding: const EdgeInsets.all(5.0),
                           child: ElevatedButton.icon(
-                            onPressed: () async {
-                              _createPdf(context, pedido);
-                            },
+                            onPressed: () async {},
                             style: ElevatedButton.styleFrom(
                               backgroundColor:
                                   const Color.fromARGB(255, 37, 29, 109),
@@ -60,56 +59,121 @@ class _PedidoPageState extends State<PedidoPage> {
                     ),
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.end,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Flexible(
-                          flex: 2,
-                          child: Padding(
-                            padding: const EdgeInsets.all(5.0),
-                            child: ElevatedButton.icon(
-                              onPressed: () async {
-                                _createPdf(context, pedido);
-                              },
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor:
-                                    const Color.fromARGB(255, 37, 29, 109),
+                        Padding(
+                          padding: const EdgeInsets.all(1.0),
+                          child: GestureDetector(
+                            child: MouseRegion(
+                              cursor: SystemMouseCursors.click,
+                              child: Container(
+                                width: MediaQuery.of(context).size.width * 0.3,
+                                height: MediaQuery.of(context).size.width * 0.11,
+                                decoration: ShapeDecoration(
+                                  color: const Color.fromARGB(255, 37, 29, 109),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
+                                  shadows: const [
+                                    BoxShadow(
+                                      color: Color(0x3F000000),
+                                      blurRadius: 4,
+                                      offset: Offset(0, 4),
+                                      spreadRadius: 0,
+                                    )
+                                  ],
+                                ),
+                                child: const Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(Icons.share),
+                                    Text(
+                                      '  Share',
+                                      style: TextStyle(
+                                          fontSize: 14, color: Colors.white),
+                                    ),
+                                  ],
+                                ),
                               ),
-                              label: const Text('Share'),
-                              icon: const Icon(Icons.share),
                             ),
+                            onTap: () => gerarPdf(pedido, context),
                           ),
                         ),
-                        Flexible(
-                          flex: 2,
-                          child: Padding(
-                            padding: const EdgeInsets.all(5.0),
-                            child: ElevatedButton.icon(
-                              onPressed: () {
-                                showConfirmationDialog(context);
-                              },
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.red,
+                        Padding(
+                          padding: const EdgeInsets.all(1.0),
+                          child: GestureDetector(
+                            child: MouseRegion(
+                              cursor: SystemMouseCursors.click,
+                              child: Container(
+                                width: MediaQuery.of(context).size.width * 0.3,
+                                height:
+                                    MediaQuery.of(context).size.width * 0.11,
+                                decoration: ShapeDecoration(
+                                  color: Colors.red,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
+                                  shadows: const [
+                                    BoxShadow(
+                                      color: Color(0x3F000000),
+                                      blurRadius: 4,
+                                      offset: Offset(0, 4),
+                                      spreadRadius: 0,
+                                    )
+                                  ],
+                                ),
+                                child: const Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(Icons.delete),
+                                    Text(
+                                      '  Excluir',
+                                      style: TextStyle(
+                                          fontSize: 14, color: Colors.white),
+                                    ),
+                                  ],
+                                ),
                               ),
-                              label: const Text('Excluir'),
-                              icon: const Icon(Icons.delete),
                             ),
+                            onTap: () => showConfirmationDialog(context),
                           ),
                         ),
-                        Flexible(
-                          flex: 2,
-                          child: Padding(
-                            padding: const EdgeInsets.all(5.0),
-                            child: ElevatedButton.icon(
-                              onPressed: () {
-                                showConfirmationDialogFinalizar(context);
-                              },
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor:
-                                    const Color.fromARGB(255, 29, 124, 32),
+                        Padding(
+                          padding: const EdgeInsets.all(1.0),
+                          child: GestureDetector(
+                            child: MouseRegion(
+                              cursor: SystemMouseCursors.click,
+                              child: Container(
+                                width: MediaQuery.of(context).size.width * 0.3,
+                                height: MediaQuery.of(context).size.width * 0.11,
+                                decoration: ShapeDecoration(
+                                  color: const Color.fromARGB(255, 29, 124, 32),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
+                                  shadows: const [
+                                    BoxShadow(
+                                      color: Color(0x3F000000),
+                                      blurRadius: 4,
+                                      offset: Offset(0, 4),
+                                      spreadRadius: 0,
+                                    )
+                                  ],
+                                ),
+                                child: const Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(Icons.check),
+                                    Text(
+                                      '  Finalizar',
+                                      style: TextStyle(
+                                          fontSize: 14, color: Colors.white),
+                                    ),
+                                  ],
+                                ),
                               ),
-                              label: const Text('Finalizar'),
-                              icon: const Icon(Icons.check),
                             ),
+                            onTap: () => showConfirmationDialogFinalizar(context),
                           ),
                         ),
                       ],
@@ -121,53 +185,5 @@ class _PedidoPageState extends State<PedidoPage> {
             ),
           ),
         ));
-  }
-
-  _createPdf(context, Pedido? pedido) async {
-    print('iniciou o createPdf');
-    final pdfLib.Document pdf = pdfLib.Document(deflate: zlib.encode);
-
-    pdf.addPage(pdfLib.Page(
-        build: (pdfLib.Context context) => pdfLib.Center(
-                child: pdfLib.Column(children: [
-              pdfLib.Row(children: [
-                pdfLib.Text(
-                  'Pedido',
-                  style: const pdfLib.TextStyle(
-                    fontSize: 40,
-                  ),
-                )
-              ]),
-              pdfLib.Table(children: [
-                pdfLib.TableRow(children: [
-                  pdfLib.ListView.builder(
-                      itemBuilder: (context, index) {
-                        return pdfLib.Expanded(
-                            flex: 3,
-                            child: pdfLib.SvgImage(
-                                svg: ProdutoRepository
-                                    .produtos[
-                                        pedido!.itensProduto[index].produto_id]
-                                    .image!)); //
-                      },
-                      itemCount: pedido!.itensProduto.length)
-                ]),
-              ])
-            ]))));
-    final directory = await getApplicationDocumentsDirectory();
-    final String dir = directory.path;
-    final String path = '$dir/teste2.pdf';
-    final File file = File(path);
-    file.writeAsBytesSync(await pdf.save());
-    print(
-        '-----------_______------_________-------_______------______-------------------');
-    print(file.path);
-    print(file);
-    print('------------------------_-_-_-_____--__________________---');
-    PedidoPage.pathPdf = path;
-    print('finalizando.');
-    Navigator.push(context,
-        MaterialPageRoute(builder: (context) => const PedidoPdfViewPage()));
-    print('chamou PedidoPDF');
   }
 }

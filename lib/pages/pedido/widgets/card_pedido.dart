@@ -84,7 +84,7 @@ Card cardPedido(BuildContext context, Pedido pedido) {
           const Text(
             'Itens do Pedido',
             style: TextStyle(
-              fontSize: 35,
+              fontSize: 30,
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -106,8 +106,8 @@ Card cardPedido(BuildContext context, Pedido pedido) {
                                   .produtos[
                                       pedido.itensProduto[index].produto_id]
                                   .image!,
-                              height: MediaQuery.of(context).size.width * 0.35,
-                              width: MediaQuery.of(context).size.width * 0.35),
+                              height: MediaQuery.of(context).size.width * 0.22,
+                              width: MediaQuery.of(context).size.width * 0.22),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -115,9 +115,9 @@ Card cardPedido(BuildContext context, Pedido pedido) {
                                 '     ${ProdutoRepository.produtos[pedido.itensProduto[index].produto_id].nome}',
                                 style: const TextStyle(
                                   fontSize: 16,
-                                  fontWeight: FontWeight.bold,
+                                  fontWeight: FontWeight.bold,overflow: TextOverflow.ellipsis
                                 ),
-                                maxLines: 1,
+                                maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
                               ),
                               Text(
