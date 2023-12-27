@@ -59,19 +59,11 @@ Card cardPedido(BuildContext context, Pedido pedido) {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Endereço: ${pedido.cliente.rua}, ${pedido.cliente.numero}',
-                        style: const TextStyle(fontSize: 16),
-                      ),
-                      Text(
                         'Cidade: ${pedido.cliente.cidade}',
                         style: const TextStyle(fontSize: 16),
                       ),
                       Text(
                         'Estado: ${pedido.cliente.estado}',
-                        style: const TextStyle(fontSize: 16),
-                      ),
-                      Text(
-                        'CEP: ${pedido.cliente.cep}',
                         style: const TextStyle(fontSize: 16),
                       ),
                     ],
@@ -114,9 +106,9 @@ Card cardPedido(BuildContext context, Pedido pedido) {
                               Text(
                                 '     ${ProdutoRepository.produtos[pedido.itensProduto[index].produto_id].nome}',
                                 style: const TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,overflow: TextOverflow.ellipsis
-                                ),
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                    overflow: TextOverflow.ellipsis),
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
                               ),

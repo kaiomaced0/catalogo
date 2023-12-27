@@ -1,3 +1,4 @@
+import 'package:catalogo/data/model/produto.dart';
 import 'package:catalogo/pages/produtos/produtos.dart';
 import 'package:flutter/material.dart';
 import 'package:catalogo/data/repository/produto_repository.dart';
@@ -5,7 +6,8 @@ import 'package:catalogo/pages/home/widgets/bnb_home.dart';
 import 'package:catalogo/pages/home/widgets/card_produto.dart';
 
 class PageHome extends StatefulWidget {
-  const PageHome({super.key});
+  final List<Produto> prod;
+  const PageHome({required this.prod, super.key});
 
   @override
   State<PageHome> createState() => _PageHomeState();
@@ -47,7 +49,7 @@ class _PageHomeState extends State<PageHome> {
         ),
         body: Center(
           child: ListView.builder(
-              itemCount: ProdutoRepository.produtos.length,
+              itemCount: widget.prod.length,
               itemBuilder: (context, int index) => Padding(
                     padding: const EdgeInsets.fromLTRB(1, 10, 10, 1),
                     child: cardProduto(context, index),

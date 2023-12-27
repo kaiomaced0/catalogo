@@ -23,12 +23,7 @@ class ClienteRepository {
       cnpj: '',
       cpf: '855.490.531-87',
       estado: 'TO',
-      cidade: 'Paraiso do Tocantins',
-      bairro: 'Jardim Paulista',
-      cep: '77600-000',
-      rua: '',
-      numero: '',
-      complemento: ' .............',
+      cidade: 'Paraiso do Tocantins'
     ),
     Cliente(
       telefone: '',
@@ -37,12 +32,7 @@ class ClienteRepository {
       cnpj: '',
       cpf: '',
       estado: '',
-      cidade: '',
-      bairro: '',
-      cep: '',
-      rua: '',
-      numero: '',
-      complemento: ' .............',
+      cidade: ''
     ),
     // Adicione mais clientes aqui
   ];

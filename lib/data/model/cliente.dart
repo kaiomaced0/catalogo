@@ -6,11 +6,6 @@ class Cliente {
   final String cpf;
   final String estado;
   final String cidade;
-  final String bairro;
-  final String cep;
-  final String rua;
-  final String numero;
-  final String complemento;
 
   Cliente({
     required this.nomeEmpresa,
@@ -20,11 +15,6 @@ class Cliente {
     required this.cpf,
     required this.estado,
     required this.cidade,
-    required this.bairro,
-    required this.cep,
-    required this.rua,
-    required this.numero,
-    required this.complemento,
   });
 
   factory Cliente.fromJson(Map<String, dynamic> json) {
@@ -36,16 +26,11 @@ class Cliente {
       cpf: json['cpf'],
       estado: json['estado'],
       cidade: json['cidade'],
-      bairro: json['bairro'],
-      cep: json['cep'],
-      rua: json['rua'],
-      numero: json['numero'],
-      complemento: json['complemento'],
     );
   }
 
   @override
   String toString() {
-    return 'Cliente{nomeEmpresa: $nomeEmpresa, nomeCliente: $nomeCliente, cnpj: $cnpj, cpf: $cpf, estado: $estado, cidade: $cidade, bairro: $bairro, cep: $cep, rua: $rua, numero: $numero, complemento: $complemento}';
+    return 'Cliente{nomeEmpresa: $nomeEmpresa, nomeCliente: $nomeCliente, cnpj: $cnpj, cpf: $cpf, estado: $estado, cidade: $cidade}';
   }
 }

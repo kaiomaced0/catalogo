@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:catalogo/data/model/pedido.dart';
+import 'package:catalogo/data/model/produto.dart';
 import 'package:catalogo/data/repository/produto_repository.dart';
 import 'package:catalogo/pages/pedido/pdfview/pdfview_page.dart';
 import 'package:catalogo/pages/pedido/widgets/card_pedido.dart';
@@ -46,7 +47,10 @@ class _PedidoPageState extends State<PedidoPage> {
                         Padding(
                           padding: const EdgeInsets.all(5.0),
                           child: ElevatedButton.icon(
-                            onPressed: () async {},
+                            onPressed: () async {
+                              print(Produto.generateJsonFromProducts(
+                                  ProdutoRepository.produtos));
+                            },
                             style: ElevatedButton.styleFrom(
                               backgroundColor:
                                   const Color.fromARGB(255, 37, 29, 109),
